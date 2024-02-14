@@ -86,13 +86,12 @@ function sendData(type) {
         }
         // Success!!!
         // Redirect to the database page
-        document.getElementById("error").value = ""
-        window.location.href = "http://127.0.0.1:4100/CPT/"
+        document.getElementById("error").innerHTML = "Successfully updated information";
         ;
     })
     // catch fetch errors (ie ACCESS to server blocked)
         .catch(err => {
-            document.getElementById("error").value = "Could not change information"
+            document.getElementById("error").innerHTML = "Could not change information"
             console.error(err);
         });
     }
@@ -109,11 +108,10 @@ function sendData(type) {
             reader.onload = () => {
                 // console.log("here234");
                 // console.log(reader.result);
-                base64String = reader.result; // convergin to base 64
+                base64String = btoa(reader.result); // convergin to base 64
                 // console.log(base64String);
                 const url = 'http://127.0.0.1:8086/api/users/images';
                 const body = {
-                    
                     Image: base64String
                 };
                 console.log(body);
@@ -137,6 +135,7 @@ function sendData(type) {
                         }
                         // valid response will contain JSON data
                         response.json().then(data => {
+                            document.getElementById("error").innerHTML = "Successfully updated information";
                         // insert whatever code you want here
                             // ADD A SUCCESS THING HERE
                         })
@@ -152,9 +151,6 @@ function sendData(type) {
         else {
             console.error('No file selected.');
         }
-        
-
-        
             // uploading to the database
 
     }
